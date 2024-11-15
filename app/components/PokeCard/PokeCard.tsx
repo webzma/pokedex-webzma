@@ -1,18 +1,27 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils/utils";
 import firstLetterToMayus from "@/lib/utils/firstLetterToMayus";
 import formatNumber from "@/lib/utils/formatNumber";
 import { fetchPokemonData } from "@/lib/api/pokedex";
-import { PokeCardProps } from "@/lib/types/types";
-import { PokeTypes } from "@/lib/types/types";
+import { PokeCardProps, PokeTypes } from "@/lib/types/types";
 import { PokeTag } from "../PokeTag";
 
-export const PokeCard: React.FC<PokeCardProps> = async ({
-  pokeUrl,
-  number,
-}: PokeCardProps) => {
-  const pokemon = await fetchPokemonData(pokeUrl);
+export const PokeCard: React.FC<PokeCardProps> = ({ pokeUrl, number }) => {
+  const [pokemon, setPokemon] = useState<any>(null);
 
+  useEffect(() => {
+    async function getPokemonData() {
+      const data = await fetchPokemonData(pokeUrl);
+      setPokemon(data);
+    }
+
+    getPokemonData();
+  }, [pokeUrl]);
+
+  /* Esto podría vivir en un archivo en la carpeta libs/utils */
   function selectBg(type: string) {
     switch (type) {
       case "grass":
@@ -49,7 +58,13 @@ export const PokeCard: React.FC<PokeCardProps> = async ({
         return "bg-cardBg-steel";
       case "normal":
         return "bg-cardBg-normal";
+      default:
+        return "bg-cardBg-default";
     }
+  }
+
+  if (!pokemon) {
+    return <div>Loading...</div>;
   }
 
   const backgroundColor = pokemon.types[0].type.name;
@@ -57,7 +72,7 @@ export const PokeCard: React.FC<PokeCardProps> = async ({
   return (
     <article
       className={cn(
-        "flex justify-end p-6 flex-col h-[260px] w-full rounded-2xl relative max-w-[340px]",
+        "flex justify-end p-6 flex-col h-[280px] w-full rounded-2xl relative max-w-[340px]",
         selectBg(backgroundColor)
       )}
     >
@@ -88,18 +103,19 @@ export const PokeCard: React.FC<PokeCardProps> = async ({
         />
       </div>
 
-      <div>
-        <h3 className="font-bold text-3xl text-white mb-2">
+      <div className="flex gap-y-1 flex-col">
+        <h2 className="text-3xl font-bold text-white">
           {firstLetterToMayus(pokemon.name)}
-        </h3>
-        <p className="text-white font-bold text-xl mb-4">
+        </h2>
+
+        <p className="text-xl font-bold text-white mb-4 ">
           {formatNumber(number)}
         </p>
       </div>
 
       <div className="flex gap-2">
-        {pokemon.types.map((elem: PokeTypes, index: number) => (
-          <PokeTag type={elem.type.name} key={index} />
+        {pokemon.types.map((pokeType: PokeTypes) => (
+          <PokeTag key={pokeType.type.name} type={pokeType.type.name} />
         ))}
       </div>
     </article>
