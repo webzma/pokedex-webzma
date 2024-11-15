@@ -10,10 +10,6 @@ import { Pokemon } from "@/lib/types/types";
 import { useEffect, useState } from "react";
 import { sortPokemonsAZ } from "@/lib/utils/sortPokemonsAZ";
 import { sortPokemonsZA } from "@/lib/utils/sortPokemonZA";
-import {
-  reversedPokemons,
-  sortPokemonsLowest,
-} from "@/lib/utils/sortPokemonsLowest";
 import { sortPokemonsHighest } from "@/lib/utils/sortPokemonsHighest";
 
 type AlphabetFilterType = "a-z" | "z-a" | "lowest" | "highest";
