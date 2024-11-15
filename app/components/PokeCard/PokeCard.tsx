@@ -2,12 +2,15 @@ import Image from "next/image";
 import { cn } from "@/lib/utils/utils";
 import firstLetterToMayus from "@/lib/utils/firstLetterToMayus";
 import formatNumber from "@/lib/utils/formatNumber";
-import PokerTag from "../PokeTag/PokerTag";
 import { fetchPokemonData } from "@/lib/api/pokedex";
 import { PokeCardProps } from "@/lib/types/types";
 import { PokeTypes } from "@/lib/types/types";
+import { PokeTag } from "../PokeTag";
 
-export async function PokeCard({ pokeUrl, number }: PokeCardProps) {
+export const PokeCard: React.FC<PokeCardProps> = async ({
+  pokeUrl,
+  number,
+}: PokeCardProps) => {
   const pokemon = await fetchPokemonData(pokeUrl);
 
   function selectBg(type: string) {
@@ -96,9 +99,9 @@ export async function PokeCard({ pokeUrl, number }: PokeCardProps) {
 
       <div className="flex gap-2">
         {pokemon.types.map((elem: PokeTypes, index: number) => (
-          <PokerTag type={elem.type.name} key={index} />
+          <PokeTag type={elem.type.name} key={index} />
         ))}
       </div>
     </article>
   );
-}
+};
