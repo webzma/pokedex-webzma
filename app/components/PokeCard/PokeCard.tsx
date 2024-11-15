@@ -6,11 +6,11 @@ import { cn } from "@/lib/utils/utils";
 import firstLetterToMayus from "@/lib/utils/firstLetterToMayus";
 import formatNumber from "@/lib/utils/formatNumber";
 import { fetchPokemonData } from "@/lib/api/pokedex";
-import { PokeCardProps, PokeTypes } from "@/lib/types/types";
+import { PokeCardProps, Pokemon } from "@/lib/types/types";
 import { PokeTag } from "../PokeTag";
 
 export const PokeCard: React.FC<PokeCardProps> = ({ pokeUrl, number }) => {
-  const [pokemon, setPokemon] = useState<any>(null);
+  const [pokemon, setPokemon] = useState<Pokemon>();
 
   useEffect(() => {
     async function getPokemonData() {
@@ -114,7 +114,7 @@ export const PokeCard: React.FC<PokeCardProps> = ({ pokeUrl, number }) => {
       </div>
 
       <div className="flex gap-2">
-        {pokemon.types.map((pokeType: PokeTypes) => (
+        {pokemon.types.map((pokeType) => (
           <PokeTag key={pokeType.type.name} type={pokeType.type.name} />
         ))}
       </div>

@@ -11,8 +11,7 @@ import { useEffect, useState } from "react";
 import { sortPokemonsAZ } from "@/lib/utils/sortPokemonsAZ";
 import { sortPokemonsZA } from "@/lib/utils/sortPokemonZA";
 import { sortPokemonsHighest } from "@/lib/utils/sortPokemonsHighest";
-
-type AlphabetFilterType = "a-z" | "z-a" | "lowest" | "highest";
+import { AlphabetFilterType } from "@/lib/types/types";
 
 export default function Home() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);

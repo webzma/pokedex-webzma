@@ -6,18 +6,26 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import { AlphabetFilterType } from "@/lib/types/types";
+
 interface AlphabetFilterProps {
-  setAlphabetFilter: (value: string) => void;
+  setAlphabetFilter: React.Dispatch<
+    React.SetStateAction<AlphabetFilterType | undefined>
+  >;
 }
 
 export function AlphabetFilter({ setAlphabetFilter }: AlphabetFilterProps) {
-  function onValueChangeFilter(value: string) {
+  function onValueChangeFilter(value: AlphabetFilterType) {
     setAlphabetFilter(value);
   }
 
   return (
     <div className="font-bold">
-      <Select onValueChange={(e) => onValueChangeFilter(e)}>
+      <Select
+        onValueChange={(value) =>
+          onValueChangeFilter(value as AlphabetFilterType)
+        }
+      >
         <SelectTrigger className="w-[200px] h-10 rounded-lg border-2 border-gray">
           <SelectValue placeholder="Lowest Number First" />
         </SelectTrigger>
