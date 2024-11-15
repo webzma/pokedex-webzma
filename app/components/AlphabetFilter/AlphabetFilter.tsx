@@ -5,11 +5,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-export function AlphabetFilter() {
+
+interface AlphabetFilterProps {
+  setAlphabetFilter: (value: string) => void;
+}
+
+export function AlphabetFilter({ setAlphabetFilter }: AlphabetFilterProps) {
+  function onValueChangeFilter(value: string) {
+    setAlphabetFilter(value);
+  }
+
   return (
     <div className="font-bold">
-      <Select>
-        <SelectTrigger className="w-[200px] h-12 rounded-lg border-2 border-gray">
+      <Select onValueChange={(e) => onValueChangeFilter(e)}>
+        <SelectTrigger className="w-[200px] h-10 rounded-lg border-2 border-gray">
           <SelectValue placeholder="Lowest Number First" />
         </SelectTrigger>
         <SelectContent>
