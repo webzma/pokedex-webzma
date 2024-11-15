@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 export default {
+  darkMode: ["class"],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,10 +10,91 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        chart: {
+          "1": "hsl(var(--chart-1))",
+          "2": "hsl(var(--chart-2))",
+          "3": "hsl(var(--chart-3))",
+          "4": "hsl(var(--chart-4))",
+          "5": "hsl(var(--chart-5))",
+        },
+        cardBg: {
+          grass: "#1EBA11",
+          fire: "#EB6C6C",
+          bug: "#91AC22",
+          water: "#009ACB",
+          poison: "#7E00CB",
+          rock: "#857D57",
+          ground: "#A77437",
+          fighting: "#BA114E",
+          ghost: "#6B2BF1",
+          psychic: "#C4484A",
+          ice: "#3A9D90",
+          dragon: "#1268B8",
+          dark: "#373737",
+          fairy: "#C01A8D",
+          electric: "#B7B117",
+          steel: "#448F85",
+          normal: "#6c757d",
+        },
+        tagBg: {
+          fire: "#FF6464",
+          bug: "#C9FF84",
+          water: "#9FF3FF",
+          poison: "#D89CFD",
+          normal: "#CBCBCB",
+          rock: "#CFC06F",
+          ground: "#FFBF72",
+          fighting: "#FF699F",
+          ghost: "#B592FF",
+          psychic: "#FF5E60",
+          ice: "#AEFFF4",
+          dragon: "#87C5FF",
+          dark: "#8F8F8F",
+          fairy: "#FFA2E3",
+          electric: "#FFFA86",
+          steel: "#A4FFE9",
+          grass: "#80E177",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 } satisfies Config;
