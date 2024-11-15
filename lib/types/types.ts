@@ -14,3 +14,7 @@ export interface PokeTypes {
     url: string;
   };
 }
+
+export interface PokeTagProps {
+  type: string;
+}
