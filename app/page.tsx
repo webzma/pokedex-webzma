@@ -16,8 +16,7 @@ import { AlphabetFilterType } from "@/lib/types/types";
 export default function Home() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [alphabetFilter, setAlphabetFilter] = useState<AlphabetFilterType>();
-
-  console.log(pokemons);
+  const [search, setSearch] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,11 +48,16 @@ export default function Home() {
   if (!alphabetFilter) {
     filteredPokemons = pokemons;
   }
+
+  const searchedPokemosBySearch = filteredPokemons.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div>
       <div className="max-w-[1416px] m-auto mt-12 px-4">
         <Title />
-        <PokeSearcher />
+        <PokeSearcher search={search} setSearch={setSearch} />
 
         <div className="flex mt-8 flex-col items-start justify-start gap-y-3 md:flex-row md:justify-between md:items-center">
           <AlphabetFilter setAlphabetFilter={setAlphabetFilter} />
@@ -61,7 +65,7 @@ export default function Home() {
         </div>
 
         <div className="grid xl:grid-cols-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6  gap-y-28 rounded-lg mt-24 justify-items-center">
-          {filteredPokemons.map((poke: Pokemon, index: number) => (
+          {searchedPokemosBySearch.map((poke: Pokemon, index: number) => (
             <PokeCard pokeUrl={poke.url} key={index} number={index} />
           ))}
         </div>

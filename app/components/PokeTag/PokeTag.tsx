@@ -53,7 +53,13 @@ export const PokeTag: React.FC<PokeTagProps> = ({ type }) => {
           "bg-[linear-gradient(0deg,_#CBE9FF_0%,_#2299EE_100%)]"
       )}
     >
-      <Image src={`/${type}.svg`} alt={`icon ${type}`} width={17} height={17} />
+      <Image
+        src={`/${type}.svg`}
+        alt={`icon ${type}`}
+        width={17}
+        height={17}
+        className="w-[17px] h-[17px]"
+      />
       {firstLetterToMayus(type)}
     </div>
   );

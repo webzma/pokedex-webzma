@@ -8,17 +8,20 @@ import formatNumber from "@/lib/utils/formatNumber";
 import { fetchPokemonData } from "@/lib/api/pokedex";
 import { PokeCardProps, Pokemon } from "@/lib/types/types";
 import { PokeTag } from "../PokeTag";
+import { LoadingSkeleton } from "../LoadingSkeleton/LoadingSkeleton";
 
 export const PokeCard: React.FC<PokeCardProps> = ({ pokeUrl, number }) => {
   const [pokemon, setPokemon] = useState<Pokemon>();
 
   useEffect(() => {
-    async function getPokemonData() {
-      const data = await fetchPokemonData(pokeUrl);
-      setPokemon(data);
-    }
+    setTimeout(async () => {
+      async function getPokemonData() {
+        const data = await fetchPokemonData(pokeUrl);
+        setPokemon(data);
+      }
 
-    getPokemonData();
+      getPokemonData();
+    }, 1000);
   }, [pokeUrl]);
 
   /* Esto podría vivir en un archivo en la carpeta libs/utils */
@@ -64,7 +67,7 @@ export const PokeCard: React.FC<PokeCardProps> = ({ pokeUrl, number }) => {
   }
 
   if (!pokemon) {
-    return <div>Loading...</div>;
+    return <LoadingSkeleton />;
   }
 
   const backgroundColor = pokemon.types[0].type.name;
@@ -81,7 +84,7 @@ export const PokeCard: React.FC<PokeCardProps> = ({ pokeUrl, number }) => {
         alt="Poke SVG"
         width="100"
         height="100"
-        className="absolute bottom-0 left-0 translate-y-8 -translate-x-4"
+        className="absolute bottom-0 left-0 translate-y-8 -translate-x-4 h-auto w-auto"
       />
 
       <Image
@@ -89,7 +92,7 @@ export const PokeCard: React.FC<PokeCardProps> = ({ pokeUrl, number }) => {
         alt="Poke SVG"
         width="50"
         height="50"
-        className="absolute bottom-0 left-0 translate-y-7 -translate-x-4"
+        className="absolute bottom-0 left-0 translate-y-7 -translate-x-4 h-auto w-auto"
       />
 
       <div className="flex justify-self-center mx-auto">
