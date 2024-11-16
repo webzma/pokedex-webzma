@@ -57,7 +57,7 @@ export default function Home() {
     <div>
       <div className="max-w-[1416px] m-auto mt-12 px-4">
         <Title />
-        <PokeSearcher search={search} setSearch={setSearch} />
+        <PokeSearcher setSearch={setSearch} />
 
         <div className="flex mt-8 flex-col items-start justify-start gap-y-3 md:flex-row md:justify-between md:items-center">
           <AlphabetFilter setAlphabetFilter={setAlphabetFilter} />

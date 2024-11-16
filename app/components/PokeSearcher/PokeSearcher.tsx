@@ -1,15 +1,18 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useState } from "react";
 
 interface PokeSearcherProps {
   setSearch: (search: string) => void;
-  search: string;
 }
 
-export const PokeSearcher: React.FC<PokeSearcherProps> = ({
-  setSearch,
-  search,
-}) => {
+export const PokeSearcher: React.FC<PokeSearcherProps> = ({ setSearch }) => {
+  const [inputValue, setInputValue] = useState<string>("");
+
+  const onSearch = () => {
+    setSearch(inputValue);
+  };
+
   return (
     <div>
       <div className="focus-within:outline focus-within:outline-2 focus-within:outline-[#416EDF] w-full bg-white mt-8 gap-x-4 flex items-center p-2 rounded-xl shadow-2xl shadow-[#C9D2EA]">
@@ -27,16 +30,22 @@ export const PokeSearcher: React.FC<PokeSearcherProps> = ({
           type="text"
           className="text-md flex-1 h-10 border-none outline-none text-[#416EDF] font-medium placeholder:text-[#416EDF]"
           placeholder="Pokemon name..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
         />
 
-        <Button className="hidden md:flex px-12 rounded-lg bg-[#FFCE31] text-[#416EDF] text-md hover:bg-[#FFCE31]/90 font-bold">
+        <Button
+          onClick={onSearch}
+          className="hidden md:flex px-12 rounded-lg bg-[#FFCE31] text-[#416EDF] text-md hover:bg-[#FFCE31]/90 font-bold"
+        >
           Search
         </Button>
       </div>
 
-      <Button className="flex md:hidden mt-2 py-6 w-full px-12 rounded-lg bg-[#FFCE31] text-[#416EDF] text-md hover:bg-[#FFCE31]/90 font-bold">
+      <Button
+        onClick={onSearch}
+        className="flex md:hidden mt-2 py-6 w-full px-12 rounded-lg bg-[#FFCE31] text-[#416EDF] text-md hover:bg-[#FFCE31]/90 font-bold"
+      >
         Search
       </Button>
     </div>
