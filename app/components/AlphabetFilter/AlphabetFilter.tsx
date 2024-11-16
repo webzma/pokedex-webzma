@@ -10,7 +10,7 @@ import { AlphabetFilterType } from "@/lib/types/types";
 
 interface AlphabetFilterProps {
   setAlphabetFilter: React.Dispatch<
-    React.SetStateAction<AlphabetFilterType | undefined>
+    React.SetStateAction<AlphabetFilterType | null>
   >;
 }
 

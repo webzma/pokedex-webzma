@@ -5,53 +5,11 @@ import { Title } from "./components/Title/Title";
 import { AlphabetFilter } from "./components/AlphabetFilter";
 import { ButtonFilter } from "./components/ButtonFilter";
 import { PokeCard } from "./components/PokeCard";
-import { fetchAllPokemons } from "@/lib/api/pokedex";
 import { Pokemon } from "@/lib/types/types";
-import { useEffect, useState } from "react";
-import { sortPokemonsAZ } from "@/lib/utils/sortPokemonsAZ";
-import { sortPokemonsZA } from "@/lib/utils/sortPokemonZA";
-import { sortPokemonsHighest } from "@/lib/utils/sortPokemonsHighest";
-import { AlphabetFilterType } from "@/lib/types/types";
+import { usePokemonData } from "@/lib/hooks/usePokemonData";
 
 export default function Home() {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const [alphabetFilter, setAlphabetFilter] = useState<AlphabetFilterType>();
-  const [search, setSearch] = useState<string>("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const fetchPokemons = await fetchAllPokemons();
-      setPokemons(fetchPokemons.results);
-    };
-
-    fetchData();
-  }, []);
-
-  let filteredPokemons = pokemons;
-
-  if (alphabetFilter === "a-z") {
-    filteredPokemons = sortPokemonsAZ(pokemons);
-  }
-
-  if (alphabetFilter === "z-a") {
-    filteredPokemons = sortPokemonsZA(pokemons);
-  }
-
-  if (alphabetFilter === "lowest") {
-    filteredPokemons = pokemons;
-  }
-
-  if (alphabetFilter === "highest") {
-    filteredPokemons = sortPokemonsHighest(pokemons);
-  }
-
-  if (!alphabetFilter) {
-    filteredPokemons = pokemons;
-  }
-
-  const searchedPokemosBySearch = filteredPokemons.filter((pokemon) =>
-    pokemon.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const { pokemons, setAlphabetFilter, setSearch } = usePokemonData();
 
   return (
     <div>
@@ -65,7 +23,7 @@ export default function Home() {
         </div>
 
         <div className="grid xl:grid-cols-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6  gap-y-28 rounded-lg mt-24 justify-items-center">
-          {searchedPokemosBySearch.map((poke: Pokemon, index: number) => (
+          {pokemons.map((poke: Pokemon, index: number) => (
             <PokeCard pokeUrl={poke.url} key={index} number={index} />
           ))}
         </div>
