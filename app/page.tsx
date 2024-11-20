@@ -7,9 +7,12 @@ import { ButtonFilter } from "./components/ButtonFilter";
 import { PokeCard } from "./components/PokeCard";
 import { Pokemon } from "@/lib/types/types";
 import { usePokemonData } from "@/lib/hooks/usePokemonData";
+import Image from "next/image";
 
 export default function Home() {
+  const { search } = usePokemonData();
   const { pokemons, setAlphabetFilter, setSearch } = usePokemonData();
+  console.log(pokemons, search);
 
   return (
     <div>
@@ -22,7 +25,7 @@ export default function Home() {
           <ButtonFilter />
         </div>
 
-        <div className="grid xl:grid-cols-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6  gap-y-28 rounded-lg mt-24 justify-items-center">
+        <div className="mb-10 grid xl:grid-cols-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6  gap-y-28 rounded-lg mt-24 justify-items-center">
           {pokemons.map((poke: Pokemon, index: number) => (
             <PokeCard pokeUrl={poke.url} key={index} number={index} />
           ))}

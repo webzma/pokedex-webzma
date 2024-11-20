@@ -10,6 +10,7 @@ export function usePokemonData() {
   const [alphabetFilter, setAlphabetFilter] =
     useState<AlphabetFilterType | null>(null);
   const [search, setSearch] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,6 +56,9 @@ export function usePokemonData() {
   return {
     pokemons: searchedPokemons,
     setAlphabetFilter,
+    search,
     setSearch,
+    isLoading,
+    setIsLoading,
   };
 }

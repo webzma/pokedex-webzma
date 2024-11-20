@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils/utils";
 import firstLetterToMayus from "@/lib/utils/firstLetterToMayus";
@@ -9,6 +9,7 @@ import { fetchPokemonData } from "@/lib/api/pokedex";
 import { PokeCardProps, Pokemon } from "@/lib/types/types";
 import { PokeTag } from "../PokeTag";
 import { LoadingSkeleton } from "../LoadingSkeleton/LoadingSkeleton";
+// import { setTimeout } from "timers/promises";
 
 export const PokeCard: React.FC<PokeCardProps> = ({ pokeUrl, number }) => {
   const [pokemon, setPokemon] = useState<Pokemon>();
@@ -23,7 +24,9 @@ export const PokeCard: React.FC<PokeCardProps> = ({ pokeUrl, number }) => {
       }
     }
 
-    getPokemonData();
+    setTimeout(() => {
+      getPokemonData();
+    }, 1000);
   }, [pokeUrl]);
 
   /* Esto podría vivir en un archivo en la carpeta libs/utils */
@@ -69,7 +72,7 @@ export const PokeCard: React.FC<PokeCardProps> = ({ pokeUrl, number }) => {
   }
 
   if (!pokemon) {
-    return <Suspense fallback={<LoadingSkeleton />} />;
+    return <LoadingSkeleton />;
   }
 
   const backgroundColor = pokemon.types[0].type.name;
