@@ -7,7 +7,6 @@ import { ButtonFilter } from "./components/ButtonFilter";
 import { PokeCard } from "./components/PokeCard";
 import { Pokemon } from "@/lib/types/types";
 import { usePokemonData } from "@/lib/hooks/usePokemonData";
-import Image from "next/image";
 
 export default function Home() {
   const { search } = usePokemonData();
