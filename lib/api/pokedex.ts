@@ -8,7 +8,7 @@ export async function fetchPokemonData(pokeUrl: string) {
   return data;
 }
 
-export async function fetchAllPokemons(offset = 0, limit = 600) {
+export async function fetchAllPokemons(offset = 0, limit = 100) {
   const response = await fetch(
     `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
   );
